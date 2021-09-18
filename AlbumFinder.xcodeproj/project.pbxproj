@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		675DE70326F6208D00B01F8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675DE70226F6208D00B01F8C /* AppDelegate.swift */; };
-		675DE70526F6208D00B01F8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675DE70426F6208D00B01F8C /* SceneDelegate.swift */; };
 		675DE70726F6208D00B01F8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675DE70626F6208D00B01F8C /* ViewController.swift */; };
-		675DE70A26F6208D00B01F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675DE70826F6208D00B01F8C /* Main.storyboard */; };
 		675DE70C26F6209000B01F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675DE70B26F6209000B01F8C /* Assets.xcassets */; };
 		675DE70F26F6209000B01F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675DE70D26F6209000B01F8C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,9 +16,7 @@
 /* Begin PBXFileReference section */
 		675DE6FF26F6208D00B01F8C /* AlbumFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlbumFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		675DE70226F6208D00B01F8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		675DE70426F6208D00B01F8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		675DE70626F6208D00B01F8C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		675DE70926F6208D00B01F8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		675DE70B26F6209000B01F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		675DE70E26F6209000B01F8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		675DE71026F6209000B01F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,9 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				675DE70226F6208D00B01F8C /* AppDelegate.swift */,
-				675DE70426F6208D00B01F8C /* SceneDelegate.swift */,
 				675DE70626F6208D00B01F8C /* ViewController.swift */,
-				675DE70826F6208D00B01F8C /* Main.storyboard */,
 				675DE70B26F6209000B01F8C /* Assets.xcassets */,
 				675DE70D26F6209000B01F8C /* LaunchScreen.storyboard */,
 				675DE71026F6209000B01F8C /* Info.plist */,
@@ -126,7 +120,6 @@
 			files = (
 				675DE70F26F6209000B01F8C /* LaunchScreen.storyboard in Resources */,
 				675DE70C26F6209000B01F8C /* Assets.xcassets in Resources */,
-				675DE70A26F6208D00B01F8C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,21 +132,12 @@
 			files = (
 				675DE70726F6208D00B01F8C /* ViewController.swift in Sources */,
 				675DE70326F6208D00B01F8C /* AppDelegate.swift in Sources */,
-				675DE70526F6208D00B01F8C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		675DE70826F6208D00B01F8C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				675DE70926F6208D00B01F8C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		675DE70D26F6209000B01F8C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,6 +273,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8C7N2PLY3;
 				INFOPLIST_FILE = AlbumFinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,7 +281,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.albertRazhapov.AlbumFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,6 +293,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8C7N2PLY3;
 				INFOPLIST_FILE = AlbumFinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +301,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.albertRazhapov.AlbumFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
