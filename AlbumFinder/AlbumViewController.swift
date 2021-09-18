@@ -13,12 +13,14 @@ private let reuseIdentifier = "Cell"
 class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     
     let searchController = UISearchController(searchResultsController: nil)
-
+    
+    let albums: [String] = ["first", "second", "third"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.backgroundColor = .white
         setupSearchBar()
         setupNavigationBar()
     }
@@ -40,23 +42,23 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
     }
-
+    
     // MARK:- UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return albums.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         cell.backgroundColor = .systemGray
-    
+        
         return cell
     }
 }
@@ -65,7 +67,7 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
 extension AlbumViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(
+        return CGSize(
             width: (view.frame.width / 2) - 16,
             height: (view.frame.width / 2) - 16
         )
