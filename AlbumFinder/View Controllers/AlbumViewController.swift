@@ -14,27 +14,70 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    var albums: [Album] = []
+    var albums = [Album](){
+        didSet {
+            if albums.count == 0 {
+                if (searchController.searchBar.text != "") {
+                    emptyResult.isHidden = false
+                    emptyResult.text = "По вашему запросу ничего не найдено"
+                } else {
+                    emptyResult.text = "Пожалуйста, введите поисковой запрос"
+                    emptyResult.isHidden = false
+                }
+            } else {
+                emptyResult.isHidden = true
+            }
+        }
+    }
+    
+    var themeColor: UIColor = .white
+    
+    let emptyResult: UILabel = {
+        let label = UILabel()
+        label.text = "Пожалуйста, введите поисковой запрос"
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView!.register(AlbumCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.backgroundColor = .white
+        
         setupSearchBar()
-        setupNavigationBar()
+        setConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if overrideUserInterfaceStyle == .light {
+            themeColor = .white
+            collectionView.backgroundColor = themeColor
+            navigationController?.navigationBar.standardAppearance.backgroundColor = themeColor
+            navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = themeColor
+        } else {
+            themeColor = .systemFill
+            collectionView.backgroundColor = themeColor
+            navigationController?.navigationBar.standardAppearance.backgroundColor = themeColor
+            navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = themeColor
+        }
+    }
+    
+    func setConstraints(){
+        view.addSubview(emptyResult)
+        
+        emptyResult.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            emptyResult.widthAnchor.constraint(equalToConstant: view.frame.width),
+            emptyResult.heightAnchor.constraint(equalToConstant: view.frame.width),
+            emptyResult.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyResult.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     // MARK: - Search view setup
-    
-    private func setupNavigationBar() {
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.backgroundColor = UIColor(red: 225 / 255, green: 225 / 255, blue: 235 / 255, alpha: 1)
-        
-        navigationController?.navigationBar.standardAppearance = navBarAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-    }
     
     private func setupSearchBar() {
         navigationItem.searchController = searchController
@@ -70,6 +113,20 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let detailVC = DetailAlbumViewController()
+        let album = albums[indexPath.row]
+        let albumID = album.collectionId
+        
+        detailVC.album = album
+        
+        
+        NetworkManager.shared.fetchAlbumDetails(from: albumID) {(searchResults) in
+            guard let tracksCount = searchResults?.results else { return }
+            for track in tracksCount {
+                if track.wrapperType != "collection" {
+                    detailVC.tracks.append(track)
+                }
+            }
+        }
         
         present(detailVC, animated: true)
     }

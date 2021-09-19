@@ -7,10 +7,19 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class HistoryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if overrideUserInterfaceStyle == .light {
+            tableView.backgroundColor = .white
+        } else {
+            tableView.backgroundColor = .systemFill
+        }
     }
 
     // MARK: - Table view data source
