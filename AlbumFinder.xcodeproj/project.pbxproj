@@ -12,6 +12,8 @@
 		675DE70F26F6209000B01F8C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675DE70D26F6209000B01F8C /* LaunchScreen.storyboard */; };
 		675DE71D26F624DD00B01F8C /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675DE71C26F624DD00B01F8C /* AlbumViewController.swift */; };
 		675DE72026F6287200B01F8C /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675DE71F26F6287200B01F8C /* HistoryViewController.swift */; };
+		6794B94C26F7910F00382F71 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794B94B26F7910F00382F71 /* NetworkManager.swift */; };
+		6794B94F26F7918600382F71 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794B94E26F7918600382F71 /* SearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		675DE71026F6209000B01F8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		675DE71C26F624DD00B01F8C /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		675DE71F26F6287200B01F8C /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		6794B94B26F7910F00382F71 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6794B94E26F7918600382F71 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,56 @@
 		675DE70126F6208D00B01F8C /* AlbumFinder */ = {
 			isa = PBXGroup;
 			children = (
-				675DE70226F6208D00B01F8C /* AppDelegate.swift */,
-				675DE71C26F624DD00B01F8C /* AlbumViewController.swift */,
-				675DE71F26F6287200B01F8C /* HistoryViewController.swift */,
-				675DE70B26F6209000B01F8C /* Assets.xcassets */,
+				6794B95126F791CD00382F71 /* Supporting Files */,
+				6794B95326F791DF00382F71 /* View Controllers */,
+				6794B95526F791ED00382F71 /* Services */,
+				6794B95726F7920000382F71 /* Models */,
+				6794B95926F7920900382F71 /* Resourses */,
 				675DE70D26F6209000B01F8C /* LaunchScreen.storyboard */,
-				675DE71026F6209000B01F8C /* Info.plist */,
 			);
 			path = AlbumFinder;
+			sourceTree = "<group>";
+		};
+		6794B95126F791CD00382F71 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				675DE70226F6208D00B01F8C /* AppDelegate.swift */,
+				675DE71026F6209000B01F8C /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6794B95326F791DF00382F71 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				675DE71C26F624DD00B01F8C /* AlbumViewController.swift */,
+				675DE71F26F6287200B01F8C /* HistoryViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		6794B95526F791ED00382F71 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6794B94B26F7910F00382F71 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6794B95726F7920000382F71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6794B94E26F7918600382F71 /* SearchResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6794B95926F7920900382F71 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				675DE70B26F6209000B01F8C /* Assets.xcassets */,
+			);
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +179,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6794B94C26F7910F00382F71 /* NetworkManager.swift in Sources */,
+				6794B94F26F7918600382F71 /* SearchResponse.swift in Sources */,
 				675DE72026F6287200B01F8C /* HistoryViewController.swift in Sources */,
 				675DE71D26F624DD00B01F8C /* AlbumViewController.swift in Sources */,
 				675DE70326F6208D00B01F8C /* AppDelegate.swift in Sources */,
@@ -276,7 +324,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8C7N2PLY3;
-				INFOPLIST_FILE = AlbumFinder/Info.plist;
+				INFOPLIST_FILE = "AlbumFinder/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -296,7 +344,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D8C7N2PLY3;
-				INFOPLIST_FILE = AlbumFinder/Info.plist;
+				INFOPLIST_FILE = "AlbumFinder/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
