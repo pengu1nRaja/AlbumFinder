@@ -7,6 +7,7 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class AlbumCell: UICollectionViewCell {
     
     var albumImage: ImageViewManager = {
@@ -16,8 +17,17 @@ class AlbumCell: UICollectionViewCell {
         return image
     } ()
     
+    var spinnerView: UIActivityIndicatorView! = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        spinnerView.center = contentView.center
         
         layoutSubviews()
         setup()
@@ -47,6 +57,7 @@ class AlbumCell: UICollectionViewCell {
         self.backgroundColor = UIColor(red: 225 / 255, green: 225 / 255, blue: 235 / 255, alpha: 1)
         self.addSubview(albumImage)
         self.addSubview(albumTitleLabel)
+        self.addSubview(spinnerView)
     }
     
     override func layoutSubviews() {
@@ -64,6 +75,5 @@ class AlbumCell: UICollectionViewCell {
             y: 0,
             width: frameWidth,
             height: frameWidth)
-
     }
 }

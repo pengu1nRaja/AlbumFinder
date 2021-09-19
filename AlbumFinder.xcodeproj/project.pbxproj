@@ -16,6 +16,7 @@
 		6794B94F26F7918600382F71 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794B94E26F7918600382F71 /* SearchResponse.swift */; };
 		6794B95C26F7962600382F71 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794B95B26F7962600382F71 /* AlbumCell.swift */; };
 		6794B95F26F7965100382F71 /* ImageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794B95E26F7965100382F71 /* ImageViewManager.swift */; };
+		6794B96226F7ACB900382F71 /* DetailAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794B96126F7ACB900382F71 /* DetailAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		6794B94E26F7918600382F71 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		6794B95B26F7962600382F71 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		6794B95E26F7965100382F71 /* ImageViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewManager.swift; sourceTree = "<group>"; };
+		6794B96126F7ACB900382F71 /* DetailAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				675DE71C26F624DD00B01F8C /* AlbumViewController.swift */,
+				6794B96126F7ACB900382F71 /* DetailAlbumViewController.swift */,
 				675DE71F26F6287200B01F8C /* HistoryViewController.swift */,
 				6794B95B26F7962600382F71 /* AlbumCell.swift */,
 			);
@@ -190,6 +193,7 @@
 				6794B94F26F7918600382F71 /* SearchResponse.swift in Sources */,
 				675DE72026F6287200B01F8C /* HistoryViewController.swift in Sources */,
 				675DE71D26F624DD00B01F8C /* AlbumViewController.swift in Sources */,
+				6794B96226F7ACB900382F71 /* DetailAlbumViewController.swift in Sources */,
 				675DE70326F6208D00B01F8C /* AppDelegate.swift in Sources */,
 				6794B95C26F7962600382F71 /* AlbumCell.swift in Sources */,
 			);

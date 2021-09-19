@@ -61,9 +61,17 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
         
         cell.backgroundColor = .clear
         cell.albumImage.fetchImage(from: imageUrl!)
+        cell.spinnerView.stopAnimating()
         cell.albumTitleLabel.text = albums[indexPath.row].collectionName
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let detailVC = DetailAlbumViewController()
+        
+        present(detailVC, animated: true)
     }
 }
 

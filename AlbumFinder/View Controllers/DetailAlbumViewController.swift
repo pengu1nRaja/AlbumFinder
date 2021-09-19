@@ -1,16 +1,17 @@
 //
-//  HistoryViewController.swift
+//  DetailAlbumViewController.swift
 //  AlbumFinder
 //
-//  Created by PenguinRaja on 18.09.2021.
+//  Created by PenguinRaja on 19.09.2021.
 //
 
 import UIKit
 
-class HistoryViewController: UITableViewController {
+class DetailAlbumViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = .systemGray
     }
 
     // MARK: - Table view data source
@@ -23,22 +24,10 @@ class HistoryViewController: UITableViewController {
         return 0
     }
 
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-
         return cell
-    }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            
-        }    
     }
 }
