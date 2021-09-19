@@ -14,12 +14,12 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    let albums: [String] = ["first", "second", "third"]
+    var albums: [Album] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(AlbumCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = .white
         setupSearchBar()
         setupNavigationBar()
@@ -55,9 +55,13 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AlbumCell
         
-        cell.backgroundColor = .systemGray
+        let imageUrl = albums[indexPath.row].artworkUrl100
+        
+        cell.backgroundColor = .clear
+        cell.albumImage.fetchImage(from: imageUrl!)
+        cell.albumTitleLabel.text = albums[indexPath.row].collectionName
         
         return cell
     }
@@ -78,3 +82,15 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UISearchBarDelegate
+
+@available(iOS 13.0, *)
+extension AlbumViewController {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NetworkManager.shared.fetchData(from: searchText) { (searchResults) in
+            self.albums = searchResults?.results ?? []
+            self.collectionView.reloadData()
+        }
+    }
+}
