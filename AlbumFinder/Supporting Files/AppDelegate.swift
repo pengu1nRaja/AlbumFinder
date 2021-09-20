@@ -21,8 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let layout = UICollectionViewFlowLayout()
         let albumVC = AlbumViewController(collectionViewLayout: layout)
         let navBar = UINavigationController(rootViewController: albumVC)
+        let historyVC = HistoryViewController()
         
-        tabBar.viewControllers = [navBar, HistoryViewController()]
+        tabBar.viewControllers = [navBar, historyVC]
+        
+        historyVC.delegate = albumVC
         
         tabBar.viewControllers?.first?.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         tabBar.viewControllers?.first?.tabBarItem.title = "Search"

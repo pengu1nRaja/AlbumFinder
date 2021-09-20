@@ -7,47 +7,46 @@
 
 import UIKit
 
+
 @available(iOS 13.0, *)
 class HistoryViewController: UITableViewController {
-
+    
+    let cellID = "Cell"
+    
+    var delegate: SearchTextResponseDelegate?
+    
+    var searchResponses = [String]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if overrideUserInterfaceStyle == .light {
-            tableView.backgroundColor = .white
-        } else {
-            tableView.backgroundColor = .systemFill
-        }
+        tableView.backgroundColor = .systemBackground
+        searchResponses = SearchTextResponses.shared.getResponses()
+        
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return searchResponses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        cell.textLabel?.text = searchResponses[indexPath.row]
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            
-        }    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let searchText = searchResponses[indexPath.row]
+        delegate?.searchResponse(searchText: searchText)
+        tabBarController?.selectedIndex = 0
     }
 }

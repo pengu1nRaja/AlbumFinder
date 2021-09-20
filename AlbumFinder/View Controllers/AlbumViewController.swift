@@ -7,10 +7,14 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+protocol SearchTextResponseDelegate {
+    func searchResponse(searchText: String)
+}
 
 @available(iOS 13.0, *)
 class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
+    
+    private let reuseIdentifier = "Cell"
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -30,7 +34,7 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
         }
     }
     
-    var themeColor: UIColor = .white
+    var searchResponses: [String] = []
     
     let emptyResult: UILabel = {
         let label = UILabel()
@@ -51,17 +55,7 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if overrideUserInterfaceStyle == .light {
-            themeColor = .white
-            collectionView.backgroundColor = themeColor
-            navigationController?.navigationBar.standardAppearance.backgroundColor = themeColor
-            navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = themeColor
-        } else {
-            themeColor = .systemFill
-            collectionView.backgroundColor = themeColor
-            navigationController?.navigationBar.standardAppearance.backgroundColor = themeColor
-            navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = themeColor
-        }
+        collectionView.backgroundColor = .systemBackground
     }
     
     func setConstraints(){
@@ -98,12 +92,12 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AlbumCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? AlbumCell else {return UICollectionViewCell()}
         
         let imageUrl = albums[indexPath.row].artworkUrl100
         
         cell.backgroundColor = .clear
-        cell.albumImage.fetchImage(from: imageUrl!)
+        cell.albumImage.fetchImage(from: imageUrl ?? "")
         cell.spinnerView.stopAnimating()
         cell.albumTitleLabel.text = albums[indexPath.row].collectionName
         
@@ -118,7 +112,6 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
         
         detailVC.album = album
         
-        
         NetworkManager.shared.fetchAlbumDetails(from: albumID) {(searchResults) in
             guard let tracksCount = searchResults?.results else { return }
             for track in tracksCount {
@@ -127,7 +120,6 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
                 }
             }
         }
-        
         present(detailVC, animated: true)
     }
 }
@@ -153,8 +145,41 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
 extension AlbumViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        NetworkManager.shared.fetchData(from: searchText) { (searchResults) in
-            self.albums = searchResults?.results ?? []
+        searchResponse(searchText: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else {return}
+        
+        SearchTextResponses.shared.saveResponses(searchText: searchText)
+    }
+}
+
+class SearchTextResponses {
+    
+    static var shared = SearchTextResponses()
+    
+    private init() {}
+    
+    private var searchResponses: [String] = []
+    
+    func saveResponses(searchText: String) {
+        searchResponses.append(searchText)
+    }
+    
+    func getResponses() -> [String] {
+        return searchResponses
+    }
+}
+
+@available(iOS 13.0, *)
+extension AlbumViewController: SearchTextResponseDelegate {
+
+    func searchResponse(searchText: String) {
+        let formattedText = searchText.replacingOccurrences(of: " ", with: "+")
+        
+        NetworkManager.shared.fetchData(from: formattedText) { (searchResults) in
+            self.albums = searchResults?.results.sorted() { $0.collectionName < $1.collectionName} ?? []
             self.collectionView.reloadData()
         }
     }

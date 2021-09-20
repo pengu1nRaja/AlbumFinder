@@ -20,7 +20,10 @@ class ImageManager {
                 return
             }
             guard url == response.url else { return }
-            completion(data, response)
+            
+            DispatchQueue.main.async {
+                completion(data, response)
+            }
         }.resume()
     }
 }
