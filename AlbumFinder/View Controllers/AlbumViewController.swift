@@ -11,7 +11,6 @@ protocol SearchTextResponseDelegate {
     func searchResponse(searchText: String)
 }
 
-@available(iOS 13.0, *)
 class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     
     private let reuseIdentifier = "Cell"
@@ -55,7 +54,11 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        collectionView.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) {
+            collectionView.backgroundColor = .systemBackground
+        } else {
+            collectionView.backgroundColor = .white
+        }
     }
     
     func setConstraints(){
@@ -124,7 +127,7 @@ class AlbumViewController: UICollectionViewController, UISearchBarDelegate {
     }
 }
 
-@available(iOS 13.0, *)
+
 extension AlbumViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -141,7 +144,7 @@ extension AlbumViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UISearchBarDelegate
 
-@available(iOS 13.0, *)
+
 extension AlbumViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -172,7 +175,7 @@ class SearchTextResponses {
     }
 }
 
-@available(iOS 13.0, *)
+
 extension AlbumViewController: SearchTextResponseDelegate {
 
     func searchResponse(searchText: String) {

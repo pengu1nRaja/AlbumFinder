@@ -15,7 +15,7 @@ class NetworkManager {
     
     func fetchData(from url: String?, with completion: @escaping (SearchResponse?) -> Void) {
         
-        let stringURL = "https://itunes.apple.com/search?term=\(url ?? "")&attribute=albumTerm&country=ru"
+        let stringURL = "https://itunes.apple.com/search?term=\(url ?? "")&attribute=albumTerm&country=ru&entity=album"
         guard let url = URL(string: stringURL) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in

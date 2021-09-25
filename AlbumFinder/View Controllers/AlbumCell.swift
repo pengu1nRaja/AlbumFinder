@@ -7,18 +7,20 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
+
 class AlbumCell: UICollectionViewCell {
     
     var albumImage: ImageViewManager = {
         let image = ImageViewManager()
         image.layer.cornerRadius = 10
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
         return image
     } ()
     
     var spinnerView: UIActivityIndicatorView! = {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .gray
         activityIndicator.color = .white
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
@@ -55,6 +57,13 @@ class AlbumCell: UICollectionViewCell {
     
     func setup() {
         self.backgroundColor = UIColor(red: 225 / 255, green: 225 / 255, blue: 235 / 255, alpha: 1)
+        
+        let gradientMaskLayer = CAGradientLayer()
+        gradientMaskLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor, UIColor.white.cgColor, UIColor.clear.cgColor]
+        gradientMaskLayer.locations = [0, 0, 0.3, 1]
+        gradientMaskLayer.frame = albumImage.bounds
+        albumImage.layer.mask = gradientMaskLayer
+
         self.addSubview(albumImage)
         self.addSubview(albumTitleLabel)
         self.addSubview(spinnerView)

@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-@available(iOS 13.0, *)
 class HistoryViewController: UITableViewController {
     
     let cellID = "Cell"
@@ -27,9 +25,12 @@ class HistoryViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = .systemBackground
+        } else {
+            tableView.backgroundColor = .white
+        }
         searchResponses = SearchTextResponses.shared.getResponses()
-        
     }
 
     // MARK: - Table view data source

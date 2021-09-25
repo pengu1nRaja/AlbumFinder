@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
 class DetailAlbumViewController: UITableViewController {
     
     private let cellID = "cell"
@@ -20,12 +19,20 @@ class DetailAlbumViewController: UITableViewController {
         }
     }
     
+    var spinnerView: UIActivityIndicatorView! = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CustomHeaderSection.self,
                            forHeaderFooterViewReuseIdentifier: "sectionHeader")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.sectionHeaderHeight = 200
+        tableView.backgroundView = spinnerView
     }
     
     @objc func closeWindows() {
@@ -42,7 +49,11 @@ class DetailAlbumViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        
+        
         cell.textLabel?.text = tracks[indexPath.row].trackName
+        spinnerView.stopAnimating()
+        
         return cell
     }
     
